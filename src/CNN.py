@@ -17,3 +17,5 @@ model.add(Dropout(0.4))
 model.add(Dense(133, activation='softmax'))
 
 model.summary()
+
+model.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
