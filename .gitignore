@@ -1,6 +1,6 @@
 
 # Custom
-dogImages/
+images/temporal/
 lfw/
 .ipynb_checkpoints/
 bottleneck_features/*
