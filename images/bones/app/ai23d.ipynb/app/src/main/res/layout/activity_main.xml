@@ -112,23 +112,24 @@
                             android:layout_marginTop="5dp"
                             android:orientation="horizontal">
 
+
                             <ImageView
                                 android:id="@+id/img_broken"
                                 android:layout_width="110dp"
                                 android:layout_height="110dp"
                                 android:layout_marginLeft="40dp"
-                                android:padding="5dp"
-                                android:src="@drawable/humerus_00009"
-                                android:tag="humerus_00009.jpeg" />
+
+                                android:src="@drawable/fracture_final_1"
+                                android:tag="fracture_final_1.jpg" />
 
 
                             <ImageView
                                 android:id="@+id/img_good"
                                 android:layout_width="110dp"
                                 android:layout_height="110dp"
-                                android:padding="5dp"
-                                android:src="@drawable/humerus_00005"
-                                android:tag="humerus_00005.jpeg" />
+
+                                android:src="@drawable/humerus_00001"
+                                android:tag="humerus_00001.jpeg" />
 
                         </LinearLayout>
 

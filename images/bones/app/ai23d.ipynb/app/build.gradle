@@ -41,6 +41,11 @@ dependencies {
         exclude module: 'leanback-v17:'
     }
 
+    compile ('com.github.ViksaaSkool:AwesomeSplash:v1.0.0'){
+        exclude module: 'leanback-v17:'
+    }
+
+
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.okhttp3:logging-interceptor:3.0.1'
 
