@@ -1,7 +1,7 @@
 package bones.aito3d;
 
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
 
 /**
  * Created by luisalfonsobejaranosanchez on 8/6/17.
@@ -18,7 +18,7 @@ public class ApiClient {
         if (retrofit==null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    //.addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
