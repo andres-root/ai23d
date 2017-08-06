@@ -1,43 +1,42 @@
 package bones.aito3d;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
+    @BindView(R.id.edt_name)
+    EditText mName;
 
-     EditText mName;
+    @BindView(R.id.edt_genre)
+    EditText mGenre;
 
-     EditText mGenre;
+    @BindView(R.id.edt_age)
+    EditText mAge;
 
-     EditText mAge;
-
-    private int age;
     private String urlImage;
-
-    //private MaterialDialog
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mName = (EditText) findViewById(R.id.edt_name);
-        mGenre = (EditText) findViewById(R.id.edt_genre);
-        mAge = (EditText) findViewById(R.id.edt_age);
+        ButterKnife.bind(this);
 
         mGenre.setKeyListener(null);
         mGenre.setFocusable(false);
 
     }
 
-
+    @OnClick(R.id.edt_genre)
     public void oClickGenre(View view) {
 
         new MaterialDialog.Builder(this)
