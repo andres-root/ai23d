@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
+import requests
 
 # AI Imports
 from keras.preprocessing import image
@@ -72,6 +73,9 @@ def upload_file():
 @app.route('/predict', methods=['GET', 'POST'])
 def test():
     img = request.args.get('image', '')
+    name = request.args.get('name', '')
     img_path = '../images/uploads/{0}'.format(img)
     prediction = prediction_machine(img_path)
+    result = requests.get('http://192.168.43.151:5000/?command=print&name={0}&location=25'.format(name))
+    print(result.status_code)
     return prediction
