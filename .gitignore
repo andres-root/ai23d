@@ -2,6 +2,7 @@
 # Custom
 images/temporal/
 lfw/
+saved_models/weights.best.ResNet50.transfer.hdf5
 .ipynb_checkpoints/
 bottleneck_features/*
 
