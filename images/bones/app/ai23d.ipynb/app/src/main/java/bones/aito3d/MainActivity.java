@@ -1,32 +1,20 @@
 package bones.aito3d;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
-import java.io.File;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-
+import okhttp3.Request;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,14 +27,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.edt_age)
     EditText mAge;
 
-    @BindView(R.id.edt_image)
-    EditText mImage;
+    //Service service;
 
-    public static final int PICK_IMAGE = 100;
+    private String tagFile;
 
-    Service service;
+    private OkHttpClient client;
 
-    private String filePath;
+    private MediaType JSON;
+
+    private String information = "http://192.168.43.36:5000/predict?";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,20 +47,15 @@ public class MainActivity extends AppCompatActivity {
         mGenre.setKeyListener(null);
         mGenre.setFocusable(false);
 
-        mImage.setKeyListener(null);
-        mImage.setFocusable(false);
-
         initializeRequest();
 
     }
 
     private void initializeRequest() {
 
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        service = new Retrofit.Builder().baseUrl(Constants.AI_ENDPOINT).client(client).build().create(Service.class);
+        client = new OkHttpClient();
 
+        JSON = MediaType.parse("application/json; charset=utf-8");
 
     }
 
@@ -88,12 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.edt_image)
-    public void onClickImage(View view) {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE);
+    @OnClick(R.id.img_broken)
+    public void onClickBroken(View view) {
+        tagFile = (String) view.getTag();
+    }
+
+    @OnClick(R.id.img_good)
+    public void onClickGood(View view) {
+        tagFile = (String) view.getTag();
     }
 
     @OnClick(R.id.btn_send)
@@ -102,56 +88,45 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public class OkHttpHandler extends AsyncTask<String,Void,String> {
+
+        OkHttpClient client = new OkHttpClient();
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            Request.Builder builder = new Request.Builder();
+            builder.url(params[0]);
+            Request request = builder.build();
+
+            try {
+                okhttp3.Response response = client.newCall(request).execute();
+                return response.body().string();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+        }
+
+
+    }
+
+
+
     private void sendData() {
 
-        if (!TextUtils.isEmpty(filePath)) {
+        information += "name="+mName.getText().toString()+"&genre="+mGenre.getText().toString()+"&age="+mAge.getText().toString()+"&image="+tagFile;
 
-            File file = new File(filePath);
-
-            RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
-            MultipartBody.Part body = MultipartBody.Part.createFormData("upload", file.getName(), reqFile);
-            RequestBody name = RequestBody.create(MediaType.parse("text/plain"), "upload_test");
-
-            retrofit2.Call<okhttp3.ResponseBody> req = service.postImage(body, name);
-
-            req.enqueue(new Callback<ResponseBody>() {
-                @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                }
-
-                @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                    t.printStackTrace();
-                }
-            });
-
-        }
+        OkHttpHandler okHttpHandler= new OkHttpHandler();
+        okHttpHandler.execute(information);
 
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK) {
-
-            android.net.Uri selectedImage = data.getData();
-
-            String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-            android.database.Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-
-            if (cursor == null)
-                return;
-
-            cursor.moveToFirst();
-
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            filePath = cursor.getString(columnIndex);
-            cursor.close();
-
-
-        }
-    }
 
 }

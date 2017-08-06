@@ -11,8 +11,8 @@
         android:layout_height="495dp"
         android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout
             android:id="@+id/bodyWrapper"
@@ -105,26 +105,32 @@
 
                         </android.support.design.widget.TextInputLayout>
 
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/inputLayoutImage"
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
-                            android:theme="@style/TextLabel">
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal">
 
-                            <EditText
-                                android:id="@+id/edt_image"
-                                style="@style/editRegistrationInput"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Image"
-                                android:imeOptions="actionDone"
-                                android:inputType="numberDecimal"
-                                android:maxLength="2"
-                                android:singleLine="true" />
+                            <ImageView
+                                android:id="@+id/img_broken"
+                                android:layout_width="110dp"
+                                android:layout_height="110dp"
+                                android:layout_marginLeft="40dp"
+                                android:padding="5dp"
+                                android:src="@drawable/humerus_00009"
+                                android:tag="humerus_00009.jpeg" />
 
-                        </android.support.design.widget.TextInputLayout>
+
+                            <ImageView
+                                android:id="@+id/img_good"
+                                android:layout_width="110dp"
+                                android:layout_height="110dp"
+                                android:padding="5dp"
+                                android:src="@drawable/humerus_00005"
+                                android:tag="humerus_00005.jpeg" />
+
+                        </LinearLayout>
 
 
                         <Button

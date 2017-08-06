@@ -6,6 +6,6 @@ package bones.aito3d;
 
 public class Constants {
 
-    public static String AI_ENDPOINT = "http://192.168.0.234:3000";
+    public static String AI_ENDPOINT = "http://192.168.43.36:5000";
 
 }

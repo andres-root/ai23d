@@ -5,18 +5,28 @@ package bones.aito3d;
  */
 
 
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
+import java.util.HashMap;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Multipart;
+import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Part;
 
-interface  Service {
+interface Service {
 
-    @Multipart
+    /*
+    @FormUrlEncoded
     @POST("/")
-    Call<ResponseBody> postImage(@Part MultipartBody.Part image, @Part("name") RequestBody name);
+    Call<ResponseBody> checkImage(@Field("name") String name, @Field("genre")
+                                 String genre, @Field("age") String age, @Field("imageId") String imageId);
+    */
+
+
+    @GET("/predict")
+    Call<ResponseBody> checkImage(@Body HashMap<String, String> user);
+
 
 }
