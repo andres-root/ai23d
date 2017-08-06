@@ -118,7 +118,6 @@
                                 android:layout_width="110dp"
                                 android:layout_height="110dp"
                                 android:layout_marginLeft="40dp"
-
                                 android:src="@drawable/fracture_final_1"
                                 android:tag="fracture_final_1.jpg" />
 
@@ -127,12 +126,21 @@
                                 android:id="@+id/img_good"
                                 android:layout_width="110dp"
                                 android:layout_height="110dp"
-
                                 android:src="@drawable/humerus_00001"
                                 android:tag="humerus_00001.jpeg" />
 
+
                         </LinearLayout>
 
+
+                        <TextView
+                            android:id="@+id/text_view_field"
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal"
+                            android:text="Texto"
+                            android:visibility="invisible" />
 
                         <Button
                             android:id="@+id/btn_send"

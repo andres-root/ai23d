@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.edt_age)
     EditText mAge;
+
+    @BindView(R.id.text_view_field)
+    TextView mResult;
 
     //Service service;
 
@@ -88,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public class OkHttpHandler extends AsyncTask<String,Void,String> {
+    public class OkHttpHandler extends AsyncTask<String, Void, String> {
 
         OkHttpClient client = new OkHttpClient();
 
@@ -102,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 okhttp3.Response response = client.newCall(request).execute();
                 return response.body().string();
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -112,7 +116,14 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
+            try {
 
+                mResult.setText(s);
+                mResult.setVisibility(View.VISIBLE);
+
+            } catch (Exception error) {
+                Log.d("EXCEPTION: ", error.getMessage());
+            }
 
         }
 
@@ -120,12 +131,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     private void sendData() {
 
-        information += "name="+mName.getText().toString()+"&genre="+mGenre.getText().toString()+"&age="+mAge.getText().toString()+"&image="+tagFile;
+        information += "name=" + mName.getText().toString() + "&genre=" + mGenre.getText().toString() + "&age=" + mAge.getText().toString() + "&image=" + tagFile;
 
-        OkHttpHandler okHttpHandler= new OkHttpHandler();
+        OkHttpHandler okHttpHandler = new OkHttpHandler();
         okHttpHandler.execute(information);
 
     }
