@@ -76,12 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.img_broken)
+
     public void onClickBroken(View view) {
         tagFile = (String) view.getTag();
     }
 
-    @OnClick(R.id.img_good)
+
     public void onClickGood(View view) {
         tagFile = (String) view.getTag();
     }
