@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">AiTo3D</string>
+
+    <string-array name="genre_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
 </resources>
