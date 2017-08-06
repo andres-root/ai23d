@@ -6,9 +6,9 @@ import numpy as np
 
 def load_dataset(path):
     data = load_files(path)
-    dog_files = np.array(data['filenames'])
-    dog_targets = np_utils.to_categorical(np.array(data['target']), 133)
-    return dog_files, dog_targets
+    bones_files = np.array(data['filenames'])
+    bones_targets = np_utils.to_categorical(np.array(data['target']), 133)
+    return bones_files, bones_targets
 
 
 names = [item[20:-1] for item in sorted(glob("images/temporal/train/*/"))]
