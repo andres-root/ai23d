@@ -30,7 +30,8 @@ categories = {
 }
 
 # Loading CNN Model
-model = load_model("../saved_models/history/weights.best.from_scratch_1_21:00_42%.hdf5")
+# model = load_model("../saved_models/history/weights.best.from_scratch_1_21:00_42%.hdf5")
+model = load_model("../saved_models/weights.best.ResNet50.transfer.hdf5")
 
 
 def prediction_machine(img_path):
@@ -67,6 +68,7 @@ def upload_file():
         img = request.form['image']
         img_path = '../images/uploads/{0}'.format(img)
         prediction = prediction_machine(img_path)
+        print(prediction)
     return prediction
 
 
