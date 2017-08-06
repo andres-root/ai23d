@@ -23,4 +23,14 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="bigButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/blue_button</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+
 </resources>
